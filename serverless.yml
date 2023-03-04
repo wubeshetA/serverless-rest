@@ -1,14 +1,44 @@
-service: aws-node-http-api-project
+service: serverless-udagram-app
 frameworkVersion: '3'
+
+plugins:
+  - serverless-webpack
 
 provider:
   name: aws
   runtime: nodejs18.x
 
+  stage: ${opt:stage, 'dev'}
+  region: ${opt:region, 'us-east-1'}
+
+  environment:
+    GROUPS_TABLE: Groups-${self:provider.stage}
+  
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Scan
+      Resource: "arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.GROUPS_TABLE}"
+
 functions:
-  api:
-    handler: index.handler
+  GetGroups:
+    handler: src/lambda/http/getGroups.handler
     events:
-      - httpApi:
-          path: /
+      - http:
+          path: groups
           method: get
+          cors: true
+
+resources:
+  Resources:
+    GroupsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:provider.environment.GROUPS_TABLE}
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
