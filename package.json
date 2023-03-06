@@ -3,13 +3,16 @@
   "version": "1.0.0",
   "description": "Serverless Udagram App",
   "main": "handler.js",
-  
   "devDependencies": {
     "@types/aws-lambda": "^8.10.111",
     "@types/node": "^18.14.6",
+    "aws-lambda": "^1.0.7",
     "aws-sdk": "^2.1328.0",
     "serverless-webpack": "^5.11.0",
-    "typescript": "^4.9.5"
+    "ts-loader": "^9.4.2",
+    "typescript": "^4.9.5",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
   },
   "dependencies": {
     "source-map-support": "^0.5.21"
