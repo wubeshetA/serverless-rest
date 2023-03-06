@@ -6,11 +6,13 @@
   "devDependencies": {
     "@types/aws-lambda": "^8.10.111",
     "@types/node": "^18.14.6",
+    "@types/uuid": "^9.0.1",
     "aws-lambda": "^1.0.7",
     "aws-sdk": "^2.1328.0",
     "serverless-webpack": "^5.11.0",
     "ts-loader": "^9.4.2",
     "typescript": "^4.9.5",
+    "uuid": "^9.0.0",
     "webpack": "^5.75.0",
     "webpack-cli": "^5.0.1"
   },
