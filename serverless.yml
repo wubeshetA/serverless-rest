@@ -1,8 +1,11 @@
 service: serverless-udagram-app
+# configValidationMode: error
 frameworkVersion: '3'
 
 plugins:
   - serverless-webpack
+  # - serverless-reqvalidator-plugin
+  # - serverless-aws-documentation
 
 provider:
   name: aws
@@ -21,6 +24,8 @@ provider:
   #     Resource: "arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.GROUPS_TABLE}"
   
   # the above iamRoleStatement is deprecated, use the below instead
+
+
   iam:
     role:
       statements:
@@ -38,6 +43,7 @@ functions:
           path: groups
           method: get
           cors: true
+          
   CreateGroup:
     handler: src/lambda/http/createGroup.handler
     events:
@@ -45,9 +51,26 @@ functions:
           path: groups
           method: post
           cors: true
+          # reqValidatorName: RequestBodyValidator
+          # documentation:
+          #   summary: Create a new group
+          #   description: Create a new group
+          #   requestModels:
+          #     'application/json': GroupRequest
+  
 
 resources:
   Resources:
+
+    # RequestBodyValidator:
+    #   Type: AWS::ApiGateway::RequestValidator
+    #   Properties:
+    #     Name: RequestBodyValidator
+    #     RestApiId:
+    #       Ref: ApiGatewayRestApi
+    #     ValidateRequestBody: true
+    #     ValidateRequestParameters: false
+
     GroupsTable:
       Type: AWS::DynamoDB::Table
       Properties:
