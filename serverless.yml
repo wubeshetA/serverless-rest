@@ -27,6 +27,7 @@ provider:
         - Effect: Allow
           Action:
             - dynamodb:Scan
+            - dynamodb:PutItem
           Resource: "arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.GROUPS_TABLE}"
 
 functions:
@@ -36,6 +37,13 @@ functions:
       - http:
           path: groups
           method: get
+          cors: true
+  CreateGroup:
+    handler: src/lambda/http/createGroup.handler
+    events:
+      - http:
+          path: groups
+          method: post
           cors: true
 
 resources:
