@@ -14,11 +14,20 @@ provider:
   environment:
     GROUPS_TABLE: Groups-${self:provider.stage}
   
-  iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - dynamodb:Scan
-      Resource: "arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.GROUPS_TABLE}"
+  # iamRoleStatements:
+  #   - Effect: Allow
+  #     Action:
+  #       - dynamodb:Scan
+  #     Resource: "arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.GROUPS_TABLE}"
+  
+  # the above iamRoleStatement is deprecated, use the below instead
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:Scan
+          Resource: "arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.GROUPS_TABLE}"
 
 functions:
   GetGroups:
