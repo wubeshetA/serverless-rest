@@ -7,7 +7,7 @@ import * as AWS from 'aws-sdk'
 
 const docClient = new AWS.DynamoDB.DocumentClient()
 
-const groupsTable = process.env.IMAGES_TABLE
+const groupsTable = process.env.GROUPS_TABLE
 const imagesTable = process.env.IMAGES_TABLE
 
 export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
@@ -34,7 +34,7 @@ export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEven
         statusCode: 200,
         headers: {
             'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Credentials': true
+            // 'Access-Control-Allow-Credentials': true
         },
         body: JSON.stringify({
             items: images
@@ -71,8 +71,7 @@ async function getImages(groupId: string) {
         })
         .promise()
 
-    const items = result.Items
-    return items
+    return result.Items
 }
 
 }
