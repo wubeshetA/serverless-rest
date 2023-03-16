@@ -1,0 +1,40 @@
+{
+    "Table": {
+        "AttributeDefinitions": [
+            {
+                "AttributeName": "groupId",
+                "AttributeType": "S"
+            },
+            {
+                "AttributeName": "timestamp",
+                "AttributeType": "S"
+            }
+        ],
+        "TableName": "Images-dev",
+        "KeySchema": [
+            {
+                "AttributeName": "groupId",
+                "KeyType": "HASH"
+            },
+            {
+                "AttributeName": "timestamp",
+                "KeyType": "RANGE"
+            }
+        ],
+        "TableStatus": "ACTIVE",
+        "CreationDateTime": "2023-03-07T00:26:48.837000+03:00",
+        "ProvisionedThroughput": {
+            "NumberOfDecreasesToday": 0,
+            "ReadCapacityUnits": 0,
+            "WriteCapacityUnits": 0
+        },
+        "TableSizeBytes": 52,
+        "ItemCount": 1,
+        "TableArn": "arn:aws:dynamodb:us-east-1:823104968800:table/Images-dev",
+        "TableId": "e3659d32-f943-486c-ad2f-9c7aff264955",
+        "BillingModeSummary": {
+            "BillingMode": "PAY_PER_REQUEST",
+            "LastUpdateToPayPerRequestDateTime": "2023-03-07T00:26:48.837000+03:00"
+        }
+    }
+}
